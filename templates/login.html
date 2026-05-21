@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Login System{% endblock %}
+
+{% block content %}
+<div class="auth-card">
+    <h2>Welcome Back</h2>
+    <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 1.5rem;">Please log in to manage your account.</p>
+
+    <!-- Error/Notification Banner -->
+    {% if message %}
+        <div class="alert alert-warning alert-custom text-center" role="alert">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    <!-- Login Form -->
+    <form action="" method="post">
+        <div class="form-group">
+            <label for="InputEmail">Email Address</label>
+            <input type="email" name="email" class="form-control" id="InputEmail" placeholder="name@example.com" required>
+            <small id="emailHelp" class="form-text text-muted">We will never share your email details.</small>
+        </div>
+
+        <div class="form-group">
+            <label for="InputPassword">Password</label>
+            <input type="password" name="password" class="form-control" id="InputPassword" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="btn btn-auth btn-block mt-4">Log In</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <p style="font-size: 0.9rem; color: #666;">Don't have an account yet? <a href="/" style="font-weight: 600; color: #007bff; text-decoration: none;">Sign Up</a></p>
+    </div>
+</div>
+{% endblock %}
