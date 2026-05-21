@@ -1,36 +1,125 @@
 {% extends "base.html" %}
-{% block title %}Login System{% endblock %}
+{% block title %}Buyer Sign In | AliTechMarket{% endblock %}
 
 {% block content %}
-<div class="auth-card">
-    <h2>Welcome Back</h2>
-    <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 1.5rem;">Please log in to manage your account.</p>
+<!-- 🌟 LOCAL CARD COMPILER STYLES (Enforces centered AliExpress blocks offline) -->
+<style>
+    .auth-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5rem 1rem;
+        width: 100%;
+    }
+    .auth-card {
+        background: #ffffff;
+        border: 1px solid #E8E8E8;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        padding: 2.5rem;
+        width: 100%;
+        max-width: 440px;
+    }
+    .auth-card h2 {
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        color: #222222;
+        margin-bottom: 0.25rem;
+        font-size: 1.6rem;
+    }
+    .form-group {
+        margin-bottom: 1.25rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .form-group label {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.4rem;
+        text-align: left;
+    }
+    .form-control {
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        padding: 0.65rem 0.75rem;
+        font-size: 0.95rem;
+        background-color: #f8fafc;
+        outline: none;
+    }
+    .form-control:focus {
+        background-color: #ffffff;
+        border-color: #FF4747;
+    }
+    .form-text {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-top: 0.25rem;
+        text-align: left;
+    }
+    .btn-auth {
+        background: linear-gradient(90deg, #FF7A00, #F22E2E);
+        color: white !important;
+        border: none;
+        padding: 0.75rem;
+        font-weight: 700;
+        font-size: 1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(242,46,46,0.2);
+        margin-top: 1rem;
+    }
+    .btn-auth:hover { opacity: 0.95; }
+    
+    .alert-warning {
+        background-color: #FFF5E6;
+        color: #D97706;
+        padding: 0.75rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+</style>
 
-    <!-- Error/Notification Banner -->
-    {% if message %}
-        <div class="alert alert-warning alert-custom text-center" role="alert">
-            {{ message }}
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Welcome Back</h2>
+        <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 1.5rem; color: #64748b; text-align: left;">Please log in to manage your wholesale trade dashboard transactions.</p>
+
+        <!-- Dynamic Flash Warning Banner -->
+        {% if message %}
+            <div class="alert-warning" role="alert">
+                🔑 {{ message }}
+            </div>
+        {% endif %}
+
+        <!-- Secure Form Entry System -->
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="InputEmail">Registered Email</label>
+                <input type="email" name="email" class="form-control" id="InputEmail" placeholder="name@example.com" required>
+                <small id="emailHelp" class="form-text">We'll verify this identity with our secure records container.</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="InputPassword">Password Credentials</label>
+                <input type="password" name="password" class="form-control" id="InputPassword" placeholder="••••••••" required>
+            </div>
+            
+            <button type="submit" class="btn-auth">Sign In to Dashboard</button>
+        </form>
+
+        <div class="text-center mt-3" style="margin-top: 1.25rem;">
+            <p style="font-size: 0.9rem; color: #64748b; margin: 0;">Don't have an account yet? <a href="/" style="font-weight: 700; color: #FF4747; text-decoration: none;">Sign Up</a></p>
         </div>
-    {% endif %}
-
-    <!-- Login Form -->
-    <form action="" method="post">
-        <div class="form-group">
-            <label for="InputEmail">Email Address</label>
-            <input type="email" name="email" class="form-control" id="InputEmail" placeholder="name@example.com" required>
-            <small id="emailHelp" class="form-text text-muted">We will never share your email details.</small>
-        </div>
-
-        <div class="form-group">
-            <label for="InputPassword">Password</label>
-            <input type="password" name="password" class="form-control" id="InputPassword" placeholder="••••••••" required>
-        </div>
-
-        <button type="submit" class="btn btn-auth btn-block mt-4">Log In</button>
-    </form>
-
-    <div class="text-center mt-3">
-        <p style="font-size: 0.9rem; color: #666;">Don't have an account yet? <a href="/" style="font-weight: 600; color: #007bff; text-decoration: none;">Sign Up</a></p>
     </div>
 </div>
 {% endblock %}

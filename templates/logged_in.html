@@ -1,7 +1,131 @@
 {% extends "base.html" %}
-{% block title %}Youv'e logged in {% endblock %}
+{% block title %}AliTechMarket | Global Wholesale Hub{% endblock %}
 
 {% block content %}
-<p>Hello You have Logged in as {{ email }}</p>
+<!-- 🌟 SAFARICOM M-PESA POP-UP PROMPT SCREEN SIMULATION STYLES -->
+<style>
+    .mpesa-overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.6);
+        z-index: 9999;
+        justify-content: center;
+        align-items: center;
+    }
+    .mpesa-overlay.active { display: flex; }
+    .sim-card-box {
+        background: #1e7e34;
+        color: white;
+        width: 320px;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        text-align: center;
+        font-family: monospace, sans-serif;
+        border: 3px solid #28a745;
+    }
+    .sim-title { font-weight: 900; font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 1rem; border-bottom: 1px solid #28a745; padding-bottom: 0.5rem; }
+    .pin-field { width: 100%; padding: 0.6rem; text-align: center; font-size: 1.2rem; letter-spacing: 4px; border: none; border-radius: 6px; margin: 1rem 0; background: #ffffff; color: #222; outline: none; }
+</style>
 
+<div class="container">
+    
+    <!-- Dynamic Safaricom STK Push Progress Banner Hook -->
+    {% if session.get('mpesa_msg') %}
+        <div class="card p-3 mb-4" style="border-radius: 8px; background: #E6F4EA; border: 1px solid #34A853; box-shadow: 0 4px 12px rgba(52,168,83,0.15);" id="alertTrigger">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center;">
+                    <span style="font-size: 1.75rem; margin-right: 0.75rem;">📱</span>
+                    <div style="text-align: left;">
+                        <h6 class="mb-0 font-weight-bold" style="color: #137333;">Lipa Na M-Pesa Push Broadcasting...</h6>
+                        <small style="color: #137333;">{{ session.pop('mpesa_msg') }}</small>
+                    </div>
+                </div>
+                <!-- 🌟 INTERACTIVE PRESENTATION DEMO BUTTON TRIGGER -->
+                <button type="button" class="btn-ali" style="margin:0; width:auto; padding: 0.35rem 1rem; font-size: 0.8rem; background:#1e7e34;" onclick="openSimPrompt()">Simulate Phone Screen</button>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- User Context Banner Row -->
+    <div class="card p-3 mb-4" style="border-radius: 8px; background: #ffffff;">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <span class="badge-account" style="margin-bottom:4px;">Verified Local Buyer Node</span>
+                <h5 class="mb-0 font-weight-bold" style="color: #222;">Welcome to the Trade Platform, <span style="color:#4f46e5;">{{ username }}</span></h5>
+            </div>
+            <span style="color:#28a745; font-weight:700; font-size:0.85rem;">🔒 Region: Kenya (Ksh Hub)</span>
+        </div>
+    </div>
+
+    <!-- Product Layout Grid Framework Configuration -->
+    <h4 class="font-weight-bold mb-2" style="letter-spacing: -0.5px;">🔥 Flash Deals & Super Value Selection</h4>
+    <p class="text-muted small mb-4">Top-ranking computational components. <strong>Maximum cart ceiling limit capped tightly at Ksh 25.</strong></p>
+    
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-6 mb-4" style="display: flex;">
+            <div class="card w-100" style="border-radius: 12px; overflow: hidden; display: flex; flex-direction: column;">
+                <div class="product-frame">
+                    <span style="font-size: 3.5rem;">{{ product.img }}</span>
+                </div>
+                <div class="card-body d-flex flex-column" style="padding:1.25rem;">
+                    <h5 class="font-weight-bold mb-1" style="color: #222; font-size:1.1rem;">{{ product.name }}</h5>
+                    <div class="mb-2" style="font-size:0.8rem; color:#ff9900;">
+                        ★★★★★ <span class="text-muted" style="font-size: 0.75rem;">(4.9 Rating | 1,240+ Orders Placed)</span>
+                    </div>
+                    <p class="text-muted small" style="flex-grow:1; margin-bottom:1.5rem;">{{ product.desc }}</p>
+                    <div class="d-flex justify-content-between align-items-center border-top">
+                        <div>
+                            <small class="text-danger font-weight-bold" style="font-size: 0.7rem; text-transform: uppercase; display:block; margin-bottom:2px;">Wholesale Tariff</small>
+                            <span class="h4 mb-0 font-weight-bold" style="color:#cc0000;">Ksh {{ '%.2f' | format(product.price) }}</span>
+                        </div>
+                        <form action="/add_to_cart/{{ product._id }}" method="POST" style="margin:0;">
+                            <button type="submit" class="btn-ali" style="padding: 0.5rem 1.5rem; border-radius: 20px; font-size: 0.85rem; width:auto;">Add to Basket</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- 🌟 IMMERSIVE M-PESA SIMULATOR MODAL POPUP DIALOG DRAWER -->
+<div class="mpesa-overlay" id="mpesaModal">
+    <div class="sim-card-box">
+        <div class="sim-title">Lipa na M-PESA</div>
+        <p style="font-size: 0.85rem; line-height: 1.4; margin: 0;">Pay Ksh 10.00 to AliTechMarket Online Wholesale Store.<br>Enter 4-Digit M-Pesa PIN:</p>
+        <input type="password" class="pin-field" maxlength="4" placeholder="••••" id="mpesaPinInput">
+        <div style="display:flex; justify-content:space-between; margin-top:0.5rem;">
+            <button class="btn-logout" style="border-color:white; color:white; background:transparent; padding:0.3rem 1.5rem; font-size:0.85rem;" onclick="closeSimPrompt()">Cancel</button>
+            <button class="btn-ali" style="background:white; color:#1e7e34 !important; width:auto; padding:0.3rem 2rem; font-size:0.85rem;" onclick="submitSimPin()">Send</button>
+        </div>
+    </div>
+</div>
+
+<!-- Interaction Handler Automation Scripts Engine -->
+<script>
+    function openSimPrompt() {
+        document.getElementById('mpesaModal').classList.add('active');
+        document.getElementById('mpesaPinInput').focus();
+    }
+    function closeSimPrompt() {
+        document.getElementById('mpesaModal').classList.remove('active');
+        document.getElementById('mpesaPinInput').value = '';
+    }
+    function submitSimPin() {
+        var pin = document.getElementById('mpesaPinInput').value;
+        if(pin.length === 4) {
+            alert("✨ M-Pesa Transaction Authorized! Payment Confirmed Successfully.");
+            closeSimPrompt();
+            if(document.getElementById('alertTrigger')) {
+                document.getElementById('alertTrigger').remove();
+            }
+        } else {
+            alert("⚠️ Invalid Token: PIN must be exactly 4 digits.");
+        }
+    }
+</script>
 {% endblock %}

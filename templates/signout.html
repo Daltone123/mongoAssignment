@@ -1,7 +1,13 @@
 {% extends "base.html" %}
-{% block title %}Register System{% endblock %}
+{% block title %}Signed Out | AliTechMarket{% endblock %}
 
 {% block content %}
-<h1>You are signed out!</h1>
-
+<div style="display: flex; align-items: center; justify-content: center; padding: 5rem 1rem; width: 100%;">
+    <div style="background: #ffffff; border: 1px solid #E8E8E8; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); padding: 3rem 2.5rem; width: 100%; max-width: 440px; text-align: center;">
+        <div style="font-size: 4rem; margin-bottom: 1rem;">👋</div>
+        <h2 style="font-weight: 800; color: #222222; margin-bottom: 0.5rem; font-size: 1.6rem;">Signed Out Safely</h2>
+        <p style="font-size: 0.95rem; color: #64748b; line-height: 1.5; margin-bottom: 2rem;">Your active buyer session cookies and storage variables have been securely terminated.</p>
+        <a href="/login" style="background: linear-gradient(90deg, #FF7A00, #F22E2E); color: white !important; text-decoration: none; padding: 0.75rem; font-weight: 700; font-size: 1rem; border-radius: 25px; display: block; box-shadow: 0 4px 12px rgba(242,46,46,0.2);">Log Back In</a>
+    </div>
+</div>
 {% endblock %}
